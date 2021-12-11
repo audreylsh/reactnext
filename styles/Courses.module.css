@@ -1,0 +1,46 @@
+.single {
+    padding: 0px;
+    background: #fff;
+    border-left: 0px solid #fff;
+}
+
+.single:hover{
+    color:#f88a2f ;
+
+}
+
+
+.filterbuttons {
+    display: inline-block;
+    padding: .4em .8em;
+    margin: 2rem .4rem;
+    border:0;
+    border-radius: 5px;
+    text-align: center;
+    background: #042D42;
+    color: white;
+
+
+}
+
+.filterbuttons:focus{
+    background: #f88a2f ;
+}
+
+
+
+.btn {
+
+    padding:1rem;
+    background: #042D42;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-color: none;
+    
+}
+
+.btn:hover {
+    color:#FFB703;
+}
