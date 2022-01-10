@@ -1,50 +1,85 @@
-import { useRouter } from "next/router";
-import { courseData } from '../../components/CourseData'
+import { loadStripe } from '@stripe/stripe-js';
+import Stripe from "stripe";
+
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import {React,  useState, useEffect} from 'react';
+//import { courseData } from '../../components/CourseData'
 import Image from 'next/image'
 import styles from '../../styles/Courses.module.css'
 
 
-const courseDetail =() => {
-  const router=useRouter();
-  const data = courseData[router.query.id-1];
+export const getStaticPaths = async () => {
+  const res = await fetch('http://localhost:8000/courses');
+  const data = await res.json();
+
+  // map data to an array of path objects with params (id)
+  const paths = data.map(course => {
+    return {
+      params: { id: course.id.toString() }
+    }
+  })
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+  const res = await fetch('http://localhost:8000/courses/' + id);
+  const data = await res.json();
+
+  return {
+    props: { coursedata: data }
+  }
+}
+
+
+const Details = ({ coursedata }) => {
   
-  if (!data) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
-  } 
-  console.log(router.query.id)
-  console.log({data})
-   return (
- 
-     <>
+
+  return (
+    <>
      <div className="row mt-5">
-       <div className="col-sm-4">
-         <Image src={data.image} class="float-left" width={300} height={200} />
+      <h1>{coursedata.courseName}</h1>
+
+        <div className="col-sm-4">
+         <Image src={coursedata.image} class="float-left" width={300} height={200} />
        </div>
+  
 
-
-       <div className="col-5">
-         <h3>{data.name}</h3>
+      <div className="col-5">
+         <h3>{coursedata.name}</h3>
          <p>
-         Price: ${data.price} <br/>
+         Price: ${coursedata.price} <br/>
          Dates: 1Nov2021 - 31Dec2021 <br/>
                 Sundays 10am-12pm
          </p>
-         
-       </div>
+      </div>
 
-       <div className="col-3">
-          <button type ="button" className = {styles.btn}>
-              {data.status}
-          </button>
-       </div>
+      <div className="col-3">
+         <form action='/api/checkout_sessions' method='POST'>
+              <section>
+                  <button  id="checkoutButton" type='submit' role='link' className = {styles.filterbuttons}>
+                       {coursedata.status}
+                  </button>
+              </section>
+          </form>
 
-     </div>
+
+
+          {/* <button onClick={() => onClick(coursedata.stripeid)}>Buy</button> */}
+          <button id="checkoutButton">Click me!</button>
+          
+      </div>
+
+    
+       
      
-     <div>
+
+       <div>
         <h3>About this course</h3>
         <p>
           Summary.
@@ -69,37 +104,11 @@ const courseDetail =() => {
     <div>
       <h3>Instructor</h3>
     </div>
-       
+
+
+      </div>
        </>
-       
-
-       
-  ); 
+  );
 }
 
-
-
-export default courseDetail;
-
-/* 
-export default function ContactId() {
-  const router = useRouter();
-  const data = router.query.courseData;
-
-  return (
-    <div>
-      {data}
-    </div>
-  )
-} */
-
-/* export function getServerSideProps(context){
-  return{
-    props: {params: context.params}
-  };
-}
- 
-export default ({params}) => {
-  const {id} = params
-}
- */
+export default Details;

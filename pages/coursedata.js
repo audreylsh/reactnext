@@ -1,4 +1,4 @@
-const Coursedata = ({coursedata}) => {
+/* const Coursedata = ({coursedata}) => {
     return(
         <div>
             <h1>getStaticprops</h1>
@@ -23,4 +23,4 @@ export async function getStaticProps(){
     }
 }
 
-export default Coursedata
+export default Coursedata */

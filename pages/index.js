@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import TopCourses from '../components/TopCourses'
-import DataFetching from '../components/DataFetching'
+
 
 
 export default function Home() {

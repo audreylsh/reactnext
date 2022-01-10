@@ -72,7 +72,7 @@ function CourseListing({filterTerm}) {
                               <div className="col-sm-8">
                                   <Link href={'/courses/' + val.id} key={val.id}>
                                       <a className={styles.single}>
-                                          <h3>{val.name}</h3>
+                                          <h3>{val.courseName}</h3>
                                       </a>
                                   </Link> 
                                   <p>Category: {val.category}</p>

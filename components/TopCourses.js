@@ -22,8 +22,7 @@ function TopCourses() {
 
     return(
         <div className = "row row-content">
-             {cdata.filter( //cdata => cdata.top === 'yes'
-                           cdata=>cdata.top.includes('yes')
+             {cdata.filter(cdata => cdata.top === 'yes'
                          )
                        .map(top => (
                    
@@ -33,7 +32,7 @@ function TopCourses() {
                                     <div className="media-body">
                                     <Link href={'/courses/' + top.id} key={top.id}>
                                       <a className={styles.single}>
-                                          <h4>{top.name}</h4>
+                                          <h4>{top.courseName}</h4>
                                       </a>
                                     </Link> 
                                         <p>{top.description}</p>
