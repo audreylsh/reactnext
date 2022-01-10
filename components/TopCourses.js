@@ -27,7 +27,7 @@ function TopCourses() {
                        .map(top => (
                    
                             
-                                <div className="media col-sm-4">
+                                <div key={top.id} className="media col-sm-4">
                                     <Image className="ml-3 align-self-centre" src ={top.image} width={300} height={200}/>
                                     <div className="media-body">
                                     <Link href={'/courses/' + top.id} key={top.id}>

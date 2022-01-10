@@ -8,7 +8,7 @@ import FilterButton from '../../components/FilterButton'
 
 
 
-function displayCourses(){
+function DisplayCourses(){
 
     const [courseData, setCoursedata] = useState([])
 
@@ -70,7 +70,7 @@ export async function getStaticProps(){
     }
 }
 
-export default displayCourses;
+export default DisplayCourses;
 
 /* 
 
